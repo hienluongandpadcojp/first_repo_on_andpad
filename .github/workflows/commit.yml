@@ -1,0 +1,31 @@
+name: CI
+
+on: push
+
+jobs:
+  # print-hello-world:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run a one-line script
+  #       run: echo "Hello, world!"
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: cimg/go:1.18-node
+      options: --user root
+    services:
+      mysql:
+        image: mysql:5.7.37
+        env:
+          MYSQL_DATABASE: andpad_owner_test1
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Set up mysql
+        run: |
+          echo "Check database"
