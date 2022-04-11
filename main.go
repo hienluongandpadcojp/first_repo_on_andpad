@@ -8,4 +8,5 @@ func main() {
 	fmt.Println("This is feat 02")
 	fmt.Println("Second commit of feat 02")
 	fmt.Println("Third commit of feat03")
+	fmt.Println("Feature 004")
 }
